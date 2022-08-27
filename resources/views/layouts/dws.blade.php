@@ -29,7 +29,10 @@
     <!-- Calender CSS-->
     <link rel="stylesheet" href="./dws/calander/css/style.css" />
     <link rel="stylesheet" href="./dws/calander/css/theme.css" />
-
+    <!--Datatable CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
    
 
@@ -522,6 +525,8 @@
             // });  
         });
     </script>
+    <!--Datatable JS-->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
     @yield('script')
     

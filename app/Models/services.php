@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Bavix\Wallet\Traits\HasWallet;
 use Bavix\Wallet\Interfaces\Customer;
 use Bavix\Wallet\Interfaces\Product;
-
-
+use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Auth;
 
 class services extends Model implements Product
 {
@@ -45,4 +45,6 @@ class services extends Model implements Product
         'image',
         'cost'
     ];
+
+    
 }

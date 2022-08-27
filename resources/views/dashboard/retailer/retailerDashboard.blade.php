@@ -36,7 +36,23 @@
                             <br>
                             <div class="slider1">
                                 @foreach ($services as $item)
-                                    <div style="margin: 0 10px;"><img src="{{$item->image}}" alt="" title="{{$item->catagory}} | {{$item->Name}}"></div>
+                                    @php
+                                        $icon = "";
+                                        if (in_array($item->id,$subcribedServices)){
+                                            $icon = "fas fa-bell fa-2x";
+                                            $color = "text-danger";
+                                            $link = "/services?id=".$item->id;
+                                        }
+                                        else{
+                                            $icon = "fas fa-shopping-cart fa-2x";
+                                            $color = "text-primary";
+                                            $link = "/r_essential";
+                                        }
+                                    @endphp
+                                    <div style="margin: 0 10px;  position: relative;">
+                                        <img src="{{$item->image}}" alt="" title="{{$item->catagory}} | {{$item->Name}}">
+                                        <i class="{{$icon}} {{$color}} " style=" position: absolute; bottom: 0; left: 0;"></i>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>

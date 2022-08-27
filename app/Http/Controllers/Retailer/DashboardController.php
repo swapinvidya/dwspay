@@ -26,8 +26,11 @@ class DashboardController extends Controller
       }
 
       public function services() {
-        
-        return view('dashboard.retailer.services');
+        $services = services::all();
+        $subcribedServices = UserService::where('user_id',Auth::id())->pluck('service_id')->toArray();
+        $myServices =  services::whereIn('id', $subcribedServices)->get();
+        $subcribedServices_dates = UserService::where('user_id',Auth::id())->get();
+        return view('dashboard.retailer.services',compact(['services','subcribedServices','myServices','subcribedServices_dates']));
       }
 
       public function payment() {
@@ -60,4 +63,6 @@ class DashboardController extends Controller
         
         return view('dashboard.retailer.support');
       }
+      
+      
 }

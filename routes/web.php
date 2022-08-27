@@ -49,3 +49,6 @@ Route::get('/r_support','Retailer\DashboardController@support')->middleware('rol
 //ajax routes
 Route::post('/buyService','purcheseController@buyService');
 Route::post('/topupRequest', 'purcheseController@walletRequest');
+
+//services
+Route::get('/services','servicesController@index');
