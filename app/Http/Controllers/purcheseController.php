@@ -62,17 +62,11 @@ class purcheseController extends Controller
         $user_id = $request->input('id');
 
         $user = Auth::user();
+        //Razopay payment gateway logic
 
 
-        // try{
-        //     $user->deposit($amt);
-        // }
-        // catch(Exception $e){
-        //     return response()->json([
-        //         'success' => 'false',
-        //         'Error'  => 'Illegal Action',
-        //         ], 400);
-        // }
+
+        
         
 
         $check = welletRequests::create([

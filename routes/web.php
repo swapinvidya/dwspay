@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RazorpayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +53,8 @@ Route::post('/topupRequest', 'purcheseController@walletRequest');
 
 //services
 Route::get('/services','servicesController@index');
+
+//Razopay
+Route::get('product', [RazorpayController::class, 'razorpayProduct']);
+Route::get('paysuccess', [RazorpayController::class, 'razorPaySuccess']);
+Route::get('razor-thank-you', [RazorpayController::class, 'RazorThankYou']);

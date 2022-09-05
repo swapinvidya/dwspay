@@ -38,7 +38,21 @@
 
 </head>
 
-<body>
+@php
+    if (Session::has('notification')){
+        $notification = 'yes';
+        $msg = Session::get('message');
+        $type = Session::get('alert_type');
+        $title = Session::get('title');
+    }else{
+        $notification = '';
+        $msg = '';
+        $type = '';
+        $title = '';
+    }
+@endphp
+
+<body data-notification = '{{$notification}}' data-notification-type='{{ $type }}' data-notification-message='{{ json_encode($msg)}}' data-notification-title = '{{$title}}'>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -421,6 +435,32 @@
                 auto: true,
                 autoControls: true
             });
+
+            console.log(document.body.dataset.notificationType);
+            if (! document.body.dataset.notification) {
+                return false;
+            }
+            else {
+                var type = document.body.dataset.notificationType;
+                switch(type){
+                    case 'success':
+                        swal({
+                                title: document.body.dataset.notificationTitle,
+                                text: JSON.parse(document.body.dataset.notificationMessage),
+                                icon: "success",
+                            });
+                    break;
+
+                    case 'info':
+                        swal({
+                                title: document.body.dataset.notificationTitle,
+                                text: JSON.parse(document.body.dataset.notificationMessage),
+                                icon: "info",
+                            });
+                    break;
+                    }
+            }
+           
         });
     </script>
     
@@ -462,8 +502,80 @@
         });
     </script>
     <script>
-        $('#walbal').click(function() { 
+        // $('#walbal').click(function() { 
 
+        //     uid = {{Auth::id()}};
+        //     token = '{{ csrf_token() }}';
+
+        //     swal({
+        //             title: 'Send Wallet Topup Request',
+        //             text: 'Add Topup Amount (In INR)',
+        //             content: "input",
+        //             button: {
+        //                         text: "Send Request!",
+        //                         closeModal: false,
+        //                     },
+        //         })
+        //             .then(name => {
+        //                     if (!name) throw null;
+        //                     return fetch(`/topupRequest?name=${name}&id=${uid}`,{
+        //                         method: 'POST', // or 'PUT'
+        //                         headers: {
+        //                             'Content-Type': 'application/json',
+        //                             "X-CSRF-Token": token,
+        //                             }
+        //                     });
+        //                 })
+        //             .then(results => {
+        //                     //console.log(results);
+        //                     return results.json();
+        //                 })
+
+        //             .then(json => {
+        //                 console.log(json);
+        //                 const Amt = json.Amount;
+        //                 const Success = json.success;
+        //             if (!Amt) {
+        //                 return swal("Reload Not Successfull!");
+        //             }
+        //             swal({
+        //                 title: "Top result:",
+        //                 text: Amt,
+        //                 icon: 'success',
+        //             });
+
+        //             document.getElementById("walbal").setAttribute('value','Wallet Balance Rs '+json.bal);
+        //         })
+        //             .catch(err => {
+        //             if (err) {
+        //                 swal("Oh noes!", "The request failed!", "error");
+        //             } else {
+        //                 swal.stopLoading();
+        //                 swal.close();
+        //             }
+        //         });
+
+        //     // $.ajax({
+        //     //     url: 'controller/addBookmark',
+        //     //     type: 'POST',
+        //     //     data: {'submit':true}, // An object with the key 'submit' and value 'true;
+        //     //     success: function (result) {
+        //     //     alert("Your bookmark has been saved");
+        //     //     }
+        //     // });  
+        // });
+    </script>
+
+    <!-- Razopay Logic -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var SITEURL = '{{URL::to('')}}';
+        $.ajaxSetup({
+        headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        }); 
+        $('body').on('click', '#walbal', function(e){
             uid = {{Auth::id()}};
             token = '{{ csrf_token() }}';
 
@@ -473,60 +585,50 @@
                     content: "input",
                     button: {
                                 text: "Send Request!",
-                                closeModal: false,
+                                closeModal: true,
                             },
                 })
-                    .then(name => {
-                            if (!name) throw null;
-                            return fetch(`/topupRequest?name=${name}&id=${uid}`,{
-                                method: 'POST', // or 'PUT'
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    "X-CSRF-Token": token,
-                                    }
-                            });
-                        })
-                    .then(results => {
-                            //console.log(results);
-                            return results.json();
-                        })
-
-                    .then(json => {
-                        console.log(json);
-                        const Amt = json.Amount;
-                        const Success = json.success;
-                    if (!Amt) {
-                        return swal("Reload Not Successfull!");
-                    }
-                    swal({
-                        title: "Top result:",
-                        text: Amt,
-                        icon: 'success',
-                    });
-
-                    document.getElementById("walbal").setAttribute('value','Wallet Balance Rs '+json.bal);
-                })
-                    .catch(err => {
-                    if (err) {
-                        swal("Oh noes!", "The request failed!", "error");
-                    } else {
-                        swal.stopLoading();
-                        swal.close();
-                    }
-                });
-
-            // $.ajax({
-            //     url: 'controller/addBookmark',
-            //     type: 'POST',
-            //     data: {'submit':true}, // An object with the key 'submit' and value 'true;
-            //     success: function (result) {
-            //     alert("Your bookmark has been saved");
-            //     }
-            // });  
+            .then(name => {
+                if (!name) throw null;
+                // var totalAmount = $(this).attr("data-amount");
+                // var product_id =  $(this).attr("data-id");
+                var totalAmount = name;
+                var product_id =  uid;
+                var email = '{{Auth::user()->email}}';
+                var options = {
+                        "key": "rzp_test_OnXvFzi5hD2nA3",
+                        "amount": (totalAmount*100), // 2000 paise = INR 20
+                        "name": '{{env("APP_NAME")}}',
+                        "description": "Payment towards topup of wallet",
+                        "image": "/dws/assets/images/logo/logo_low_res.png",
+                        "handler": function (response){
+                            window.location.href = SITEURL +'/'+ 'paysuccess?payment_id='+response.razorpay_payment_id+'&product_id='+product_id+'&amount='+totalAmount;
+                        },
+                        "prefill": {
+                            "contact": '9988665544',
+                            "email":  email ,
+                            },
+                            "theme": {
+                            "color": "#3957ed"
+                            }
+                    };
+                
+                    var rzp1 = new Razorpay(options);
+                    rzp1.open();
+                    e.preventDefault();
+            });
         });
+        /*document.getElementsClass('buy_plan1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+        }*/
     </script>
+
     <!--Datatable JS-->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <!--Notification Script -->
+    
 
     @yield('script')
     
