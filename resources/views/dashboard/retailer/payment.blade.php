@@ -7,47 +7,69 @@
             <div class="row">
                 <img src="./dws/assets/images/title/dashboard.png" class = "w-100" alt="">
             </div>
-            <div class="row">
-                payment
+            <div class="bg-white rounded shadow-sm">
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col-12 mt-4 mb-4">
+                            
+                            <table id="table_id" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Confirmed</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Auth::user()->transactions as $item)
+                                        @php
+                                            $meta = "No Data";
+                                            if (json_encode($item->meta) != "null"){
+                                                    $meta = json_decode(json_encode($item->meta));
+                                                    $meta = $meta->title;
+                                                }
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                {{$item->id}}.
+                                                <img src="{{$item->image}}" alt="" width="40px">
+                                            </td>
+                                            <td>
+                                                @if($item->type == 'withdraw')
+                                                <i class='fa fa-download text-blue'></i>
+                                                @else
+                                                <i class='fa fa-upload text-cyan'></i>
+                                                @endif
+                                                &nbsp;{{$item->type}}
+                                            </td>
+                                            <td>{{$meta}}</td>
+                                            <td>
+                                                @if ($item->confirmed)
+                                                    <a class="btn btn-primary btn-sm" href="/serviceRecpt?id={{Auth::id()}}&tx={{$item->uuid}}">
+                                                        <i class="fa fa-check"></i>&nbsp;Receipt
+                                                    </a>
+                                                @else
+                                                <i class="fa fa-hour-glass"></i>
+                                                @endif
+                                            </td>
+                                            <td>{{$item->amount}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card w-100">
-                <div class="card-body text-center">
-                    <div class="profile-pic mb-3 mt-3">
-                        <img src="./dws/assets/images/users/2.jpg" width="100" class="rounded-circle" alt="user" />
-                        <h4 class="mt-3 mb-0">{{Auth::user()->name}}</h4>
-                        <strong>{{Auth::user()->roles->rolename}}</strong><br>
-                        @if (Auth::user()->roles->rolename !== "Admin" )
-                        <button class="btn btn-primary btn-sm">Upgrade</button>
-                        @endif
-                    </div>
-                    <!--calander-->
-                    <div class="calendar-container"></div>
-                    <!--Calander Ends-->
-                    <!--Location-->
-                    <div class="pt-3 pb-3">
-                        <strong >Location</strong>
-                    </div>
-                    <div id="map"></div>
-                    <!--Location Ends-->
-                </div>
-                <div class="p-4 border-top mt-3">
-                    <div class="row text-center">
-                        <div class="col-6 border-end">
-                            <a href="#" class="link d-flex align-items-center justify-content-center font-weight-medium"><i class="mdi mdi-message fs-6 me-1"></i>Message</a>
-                        </div>
-                        <div class="col-6">
-                            <a href="#" class="link d-flex align-items-center justify-content-center font-weight-medium"><i class="mdi mdi-developer-board fs-6 me-1"></i>Portfolio</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-      //
-    </div>
-</div>
-    
+@endsection
+@section('script')
+{{-- Datatable --}}
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable();
+        } );
+    </script>
 @endsection

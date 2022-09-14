@@ -5,8 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class receipt extends Model
 {
     use HasFactory;
-    protected $fillable = ['uuid'];
+
+    protected $fillable = [
+        'user_id',
+        'receipt_no',
+        'file_location'
+    ];
 }

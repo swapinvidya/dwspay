@@ -31,11 +31,12 @@
                 $user = Auth::user();
 
                 try{
-                    $user->deposit($data['amount']);
+                    $tx = $user->deposit($data['amount'],["id"=>0,"title"=>"WALLET TOPUP","description"=>"Topup of Internal wallet for Rs. ".$data['amount']]);
                     $check = welletRequests::create([
                         'user_id' => Auth::id(),
                         'amount'=> $request->amount,
                     ]);
+                    Payment::findOrFail($getId)->update(['uuid'=>$tx->uuid]);
             
                 }
                 catch(Exception $e){

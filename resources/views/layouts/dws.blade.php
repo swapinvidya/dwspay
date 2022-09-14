@@ -458,6 +458,14 @@
                                 icon: "info",
                             });
                     break;
+
+                    case 'danger':
+                        swal({
+                                title: document.body.dataset.notificationTitle,
+                                text: JSON.parse(document.body.dataset.notificationMessage),
+                                icon: "error",
+                            });
+                    break;
                     }
             }
            
@@ -593,7 +601,7 @@
                 // var totalAmount = $(this).attr("data-amount");
                 // var product_id =  $(this).attr("data-id");
                 var totalAmount = name;
-                var product_id =  uid;
+                var product_id =  1;
                 var email = '{{Auth::user()->email}}';
                 var options = {
                         "key": "rzp_test_OnXvFzi5hD2nA3",
@@ -628,6 +636,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
     <!--Notification Script -->
+    
     
 
     @yield('script')

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\services;
 use App\Models\UserService;
+use App\Models\Payment;
 
 class DashboardController extends Controller
 {
@@ -35,8 +36,8 @@ class DashboardController extends Controller
 
       public function payment() {
         
-        
-        return view('dashboard.retailer.payment');
+        $payment = Payment::where('user_id',Auth::id())->get();
+        return view('dashboard.retailer.payment',compact(['payment']));
       }
 
       public function report() {
