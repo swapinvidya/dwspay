@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\statsController;
+use Ramsey\Uuid\Provider\Node\StaticNodeProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +65,11 @@ Route::get('razor-thank-you', [RazorpayController::class, 'RazorThankYou']);
 
 //Receipts
 Route::get('serviceRecpt',[ReceiptController::class,'RecptGenarate']);
+
+//charts
+Route::get('/chartData',[statsController::class,'charts']);
+Route::get('/topUsers',[statsController::class,'topUsers']);
+
+//email
+Route::get('/emailpopup',[EmailController::class,'emailpopup']);
+Route::get('/sendAdminmail',[EmailController::class,'sendAdminmail']);

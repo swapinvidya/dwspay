@@ -214,9 +214,71 @@
                 <nav class="sidebar-nav mt-5">
                     <ul id="sidebarnav">
                         <!-- User Profile-->
+                       
+                        <!--Admin-->
+                        @if (Auth::user()->roles->rolename == "Admin" )
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link active"
                                 href="/Admin" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                    class="hide-menu">Home</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-window-restore"></i><span
+                                    class="hide-menu">Basic Settings</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-bank"></i><span
+                                    class="hide-menu">Payment Settings</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-barcode"></i><span
+                                    class="hide-menu">Products</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-code-tags"></i><span
+                                    class="hide-menu">External API</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-account-edit"></i><span
+                                    class="hide-menu">Users</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-paperclip"></i><span
+                                    class="hide-menu">Licence</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-file-multiple"></i><span
+                                    class="hide-menu">Reports</span>
+                            </a>
+                        </li>
+
+
+
+                        <!--Admin End-->
+                        @else
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link active"
+                                href="/retail" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                     class="hide-menu">Home</span></a>
                         </li>
 
@@ -225,7 +287,6 @@
                                 href="{{route('r_essentail')}}" aria-expanded="false"><i class="mdi me-2 mdi-view-grid"></i><span
                                     class="hide-menu">Essential Services</span></a>
                         </li>
-
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{route('r_services')}}" aria-expanded="false"><i class="mdi me-2 mdi-chart-scatterplot-hexbin"></i><span
@@ -274,7 +335,7 @@
                                 Pro</a>
                         </li>
                     </ul>
-
+                    @endif
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -339,40 +400,11 @@
             <!-- ============================================================== -->
            
             @yield('content')
-            <div class="col-lg-4">
-                <div class="card w-100">
-                    <div class="card-body text-center">
-                        <div class="profile-pic mb-3 mt-3">
-                            <img src="./dws/assets/images/users/2.jpg" width="100" class="rounded-circle" alt="user" />
-                            <h4 class="mt-3 mb-0">{{Auth::user()->name}}</h4>
-                            <strong>{{Auth::user()->roles->rolename}}</strong><br>
-                            @if (Auth::user()->roles->rolename !== "Admin" )
-                            <button  class="btn btn-primary btn-sm">Upgrade</button>
-                            @endif
-                            <input type="button" id="walbal" class="btn btn-danger btn-sm" value="Wallet Balance Rs {{Auth::user()->balance}}"/>
-                        </div>
-                        <!--calander-->
-                        <div class="calendar-container"></div>
-                        <!--Calander Ends-->
-                        <!--Location-->
-                        <div class="pt-3 pb-3">
-                            <strong >Location</strong>
-                        </div>
-                        <div id="map"></div>
-                        <!--Location Ends-->
-                    </div>
-                    <div class="p-4 border-top mt-3">
-                        <div class="row text-center">
-                            <div class="col-6 border-end">
-                                <a href="#" class="link d-flex align-items-center justify-content-center font-weight-medium"><i class="mdi mdi-message fs-6 me-1"></i>Message</a>
-                            </div>
-                            <div class="col-6">
-                                <a href="#" class="link d-flex align-items-center justify-content-center font-weight-medium"><i class="mdi mdi-developer-board fs-6 me-1"></i>Portfolio</a>
-                            </div>
-                        </div>
-                    </div>
+            @if (Auth::user()->roles->rolename !== "Admin")
+                <div class="col-lg-4">
+                    @include('layouts.cards.userprofile')
                 </div>
-            </div>
+            @endif
         </div>
     </div>
             <!-- ============================================================== -->
@@ -396,9 +428,12 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
+    <!--laravel JS -->
+    <script src="./js/app.js"></script>
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="./dws/assets/plugins/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap tether Core JavaScript -->
     <script src="./dws/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./dws/js/app-style-switcher.js"></script>
@@ -421,6 +456,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+    
+    
 
 
     <script>
@@ -636,11 +674,54 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
     <!--Notification Script -->
-    
+
+    <!--Chart-->
+    <script>
+       
+        fetch("/chartData?id={{Auth::id()}}")
+        .then(response => {
+            // indicates whether the response is successful (status code 200-299) or not
+            if (!response.ok) {
+            throw new Error(`Request failed with status ${reponse.status}`)
+            }
+            return response.json()
+        })
+        .then(data => {
+           
+
+            new Chartist.Bar('.ct-chart', {
+            labels: ["BANKING", "PAYMENTS","OTHERS","TRAVEL","INSURANCE"],
+            series: data
+            }, {
+            stackBars: true,
+            axisY: {
+                type: Chartist.FixedScaleAxis,
+                ticks: [0, 2, 4, 6, 8, 10],
+                low: 0
+            }
+            }).on('draw', function(data) {
+            if(data.type === 'bar') {
+                data.element.attr({
+                style: 'stroke-width: 40px'
+                });
+            }
+            });
+
+        })
+        .catch(error => console.log(error))
+        
+    </script>
     
 
+
     @yield('script')
-    
+    <script>
+        var ch = Echo.channel("activity-test");
+        ch.listen(".test", (data) => {
+            // add new price into the APPL widget
+                console.log(data.data.description);
+            });
+    </script>
 </body>
 
 </html>

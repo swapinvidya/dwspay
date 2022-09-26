@@ -9,12 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Bavix\Wallet\Traits\CanPay;
 use Bavix\Wallet\Interfaces\Customer;
+use App\Traits\RecordsActivity;
 
 
 
 class User extends Authenticatable implements Customer
 {
     use HasApiTokens, HasFactory, Notifiable, CanPay;
+    use RecordsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -49,5 +51,9 @@ class User extends Authenticatable implements Customer
     public function roles()
     {
         return $this->belongsTo(Userrole::class,'role_id');
+    }
+
+    public function kycDetails(){
+        return $this->hasOne(kyc::class);
     }
 }

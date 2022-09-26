@@ -14,7 +14,6 @@ class AddAdditionalFieldsToProduct extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            
             $table->boolean('default')->default(true);
             $table->boolean('taxable')->default(false);
             $table->float('tax')->defult(0);

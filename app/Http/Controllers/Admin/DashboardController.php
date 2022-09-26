@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -11,6 +12,7 @@ class DashboardController extends Controller
         $this->middleware('auth');
       }
       public function index() {
-        return view('dashboard.admin.adminDashboard');
+        $topUsers = User::all('id','name','email','role_id');
+        return view('dashboard.admin.adminDashboard',compact('topUsers'));
       }
 }

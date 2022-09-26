@@ -21,6 +21,7 @@ class ReceiptController extends Controller
             $request->session()->flash('alert_type' , 'danger');
             return redirect()->back();
         }
+        
         $product = Product::find($tx->product_id);
 
 

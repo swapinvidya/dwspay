@@ -13,7 +13,11 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.4"
+        "laravel/ui": "^3.4",
+        "league/fractal": "^0.20.1",
+        "livewire/livewire": "^2.10",
+        "pusher/pusher-php-server": "^7.0",
+        "spatie/laravel-fractal": "^6.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

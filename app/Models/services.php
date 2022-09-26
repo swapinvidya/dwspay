@@ -10,10 +10,12 @@ use Bavix\Wallet\Interfaces\Customer;
 use Bavix\Wallet\Interfaces\Product;
 use Ramsey\Uuid\Type\Integer;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\RecordsActivity;
 
 class services extends Model implements Product
 {
     use HasFactory, HasWallet;
+    use RecordsActivity;
 
     public function canBuy(Customer $customer, int $quantity = 1, bool $force = false): bool
     {
