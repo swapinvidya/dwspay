@@ -13,7 +13,13 @@ class Activity extends Model
         'subject_id',
         'subject_type',
         'name',
-        'user_id'
+        'user_id',
+        "to_name",
+        "body"
     ];
+
+    public function getEmail(){
+        return $this->belongsTo(email::class,'subject_id');
+    }
    
 }

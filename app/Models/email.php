@@ -12,4 +12,8 @@ class email extends Model
     use RecordsActivity;
 
     protected $fillable = ['name','user_id','body'];
+
+    public function getSender(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

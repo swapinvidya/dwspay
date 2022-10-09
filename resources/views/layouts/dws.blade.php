@@ -720,6 +720,10 @@
         ch.listen(".test", (data) => {
             // add new price into the APPL widget
                 console.log(data.data.description);
+                if (data.data != null){
+                    Livewire.emit('update','counter');
+                    console.log('component refreshed');
+                }
             });
     </script>
 </body>

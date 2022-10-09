@@ -11,7 +11,8 @@
         <a href="#" class="link">John Doe</a>
         <span class="sl-date">5 minutes ago</span>
         <p>
-        assign a new task
+        
+        {{$post->to_name}}
         <a href="#"> Design weblayout</a>
         </p>
         <div class="row">

@@ -30,11 +30,14 @@ trait RecordsActivity
      */
     public function recordActivity($event)
     {
+        //dd($this);
         $activity = Activity::create([
             'subject_id' => $this->id,
             'subject_type' => get_class($this),
             'name' => $this->getActivityName($this, $event),
-            'user_id' => $this->user_id
+            'user_id' => $this->user_id,
+            "to_name" => $this->name,
+            "body" => $this->body,
         ]);
 
         broadcast(new ActivityLogged($activity));
