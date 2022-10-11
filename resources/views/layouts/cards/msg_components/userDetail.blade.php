@@ -16,16 +16,20 @@
         <div class="mt-3 row">
           <div class="col-md-3 col-xs-12">
             <img
-              src="./dws/assets/images/big/img1.jpg"
+              src="./dws/assets/images/logo/logo_low_res.png"
               alt="user"
               class="img-responsive w-100 radius"
             />
           </div>
           <div class="col-md-9 col-xs-12">
             <p>
-              The {{$userDetails->roles->rolename}} {{$userDetails->name}} has succesfully updated the profile details.
-              The current email address is {{$userDetails->email}}
+              The {{$userDetails->roles->rolename}} {{$userDetails->name}} has succesfully updated the Mobile No And Address.
+              The current email address is {{$userDetails->email}} and Mobile No is {{$userDetails->getUserDetails->mobile}}
             </p>
+            <strong>Updated Address</strong>
+            <address>
+                {{$userDetails->getUserDetails->address}}
+            </address>
             {{-- @if (Auth::user()->roles->rolename == "Admin")
             <a
               href="#"

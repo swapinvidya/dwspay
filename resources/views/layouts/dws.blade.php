@@ -34,8 +34,6 @@
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-   
-
 </head>
 
 @php
@@ -79,10 +77,8 @@
                     <a class="navbar-brand ms-4" href="index.html">
                         <!-- Logo icon -->
                         <b class="logo-icon">
-                          
                             <!-- Dark Logo icon-->
                             <img src="./dws/assets/images/logo/logo_low_res.png" width="55px" alt="homepage" class="dark-logo" /> 
-
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -198,6 +194,7 @@
                             </li>
                         @endguest
                     </ul>
+                    
                 </div>
             </nav>
         </header>
@@ -225,49 +222,49 @@
                         </li>
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-window-restore"></i><span
+                                href="/admin_basic" aria-expanded="false"><i class="mdi me-2 mdi-window-restore"></i><span
                                     class="hide-menu">Basic Settings</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-bank"></i><span
+                                href="/admin_payment" aria-expanded="false"><i class="mdi me-2 mdi-bank"></i><span
                                     class="hide-menu">Payment Settings</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-barcode"></i><span
+                                href="/admin_product" aria-expanded="false"><i class="mdi me-2 mdi-barcode"></i><span
                                     class="hide-menu">Products</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-code-tags"></i><span
+                                href="/admin_api" aria-expanded="false"><i class="mdi me-2 mdi-code-tags"></i><span
                                     class="hide-menu">External API</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-account-edit"></i><span
+                                href="/admin_users" aria-expanded="false"><i class="mdi me-2 mdi-account-edit"></i><span
                                     class="hide-menu">Users</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-paperclip"></i><span
+                                href="/admin_licence" aria-expanded="false"><i class="mdi me-2 mdi-paperclip"></i><span
                                     class="hide-menu">Licence</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item"> 
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="#" aria-expanded="false"><i class="mdi me-2 mdi-file-multiple"></i><span
+                                href="/admin_Reports" aria-expanded="false"><i class="mdi me-2 mdi-file-multiple"></i><span
                                     class="hide-menu">Reports</span>
                             </a>
                         </li>
@@ -433,6 +430,9 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="./dws/assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script>
+        
+    </script>
 
     <!-- Bootstrap tether Core JavaScript -->
     <script src="./dws/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -451,7 +451,7 @@
     <script src="./dws/assets/plugins/d3/d3.min.js"></script>
     <script src="./dws/assets/plugins/c3-master/c3.min.js"></script>
     <!--Custom JavaScript -->
-    <script src="./dws/js/pages/dashboards/dashboard1.js"></script>
+    <script src="./dws/js/pages/dashboards/dashboard1.js?v=1.22"></script>
     <script src="./dws/js/custom.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -31,4 +31,14 @@ class ActivityTransformer extends TransformerAbstract
 	{
 		return $activity->name . " left an email, " . $activity->subject_type;
 	}
+
+	protected function updated_user(Activity $activity)
+	{
+		return $activity->name . " Updated user Details, " . $activity->subject_type;
+	}
+
+	protected function updated_userdetail(Activity $activity)
+	{
+		return $activity->name . " Updated user Details, " . $activity->subject_type;
+	}
 }

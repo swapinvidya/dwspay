@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Bavix\Wallet\Traits\CanPay;
 use Bavix\Wallet\Interfaces\Customer;
 use App\Traits\RecordsActivity;
+use App\Models\userDetail;
 
 
 
@@ -51,6 +52,11 @@ class User extends Authenticatable implements Customer
     public function roles()
     {
         return $this->belongsTo(Userrole::class,'role_id');
+    }
+
+    public function getUserDetails()
+    {
+        return $this->hasOne(userDetail::class);
     }
 
     public function kycDetails(){

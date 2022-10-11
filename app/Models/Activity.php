@@ -21,5 +21,9 @@ class Activity extends Model
     public function getEmail(){
         return $this->belongsTo(email::class,'subject_id');
     }
+
+    public function getUser(){
+        return $this->belongsTo(user::class,'user_id');
+    }
    
 }

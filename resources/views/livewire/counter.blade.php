@@ -6,10 +6,12 @@
                 <hr/>
                 @break
 
-            @case(2)
-                Second case...
+            @case('updated_user')
+                @include('layouts.cards.msg_components.userUpdate',$post)
                 @break
-        
+            @case('updated_userdetail')
+                @include('layouts.cards.msg_components.userDetail',$post)
+                @break
             @default
                 Default case...
         @endswitch

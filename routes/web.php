@@ -29,7 +29,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Admin dashboard page (role 2)
 Route::get('/Admin','Admin\DashboardController@index')->middleware('role:2')->name('admin_db');
-
+Route::get('/admin_basic','Admin\DashboardController@getBasicSettings')->middleware('role:2')->name('admin_bs');
+Route::get('/admin_payment','Admin\DashboardController@getPaySettings')->middleware('role:2')->name('admin_ps');
+Route::get('/admin_product','Admin\DashboardController@getProductSettings')->middleware('role:2')->name('admin_pros');
+Route::get('/admin_api','Admin\DashboardController@getApiSettings')->middleware('role:2')->name('admin_api');
+Route::get('/admin_users','Admin\DashboardController@getUserSettings')->middleware('role:2')->name('admin_user');
+Route::get('/admin_licence','Admin\DashboardController@getLicenceSettings')->middleware('role:2')->name('admin_lic');
+Route::get('/admin_Reports','Admin\DashboardController@getReports')->middleware('role:2')->name('admin_Report');
 //Admin dashboard page (role 3)
 Route::get('/SuperDist','SuperDist\DashboardController@index')->middleware('role:3')->name('sd_db');
 

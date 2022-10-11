@@ -30,12 +30,22 @@ trait RecordsActivity
      */
     public function recordActivity($event)
     {
-        //dd($this);
+
+        if ($this->getActivityName($this, $event) == "updated_user"){
+            $u_id = $this->id;
+        }
+        elseif($this->getActivityName($this, $event) == "updated_userdetail"){
+            $u_id = $this->user_id;
+        }
+        else{
+            $u_id = $this->user_id;
+        }
+
         $activity = Activity::create([
             'subject_id' => $this->id,
             'subject_type' => get_class($this),
             'name' => $this->getActivityName($this, $event),
-            'user_id' => $this->user_id,
+            'user_id' => $u_id,
             "to_name" => $this->name,
             "body" => $this->body,
         ]);
